@@ -133,6 +133,48 @@ function animatecomet(mesh) {
 const comet = addcomet();
 animatecomet(comet);
 
+const ambientLight = new THREE.AmbientLight(0xffffff, 10);
+scene.add(ambientLight);
+const shipLight = new THREE.PointLight(0xffffff, 100);
+shipLight.position.set(0, 0, 0);
+scene.add(shipLight);
+
+function addSpaceship() {
+  const group = new THREE.Group();
+
+  const hullGeometry = new THREE.SphereGeometry(2, 32, 32);
+  const hullMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('shiptexture.jpg')});
+  const hull = new THREE.Mesh(hullGeometry, hullMaterial);
+  group.add(hull);
+
+  const ringGeometry = new THREE.TorusGeometry(3.5, 0.35, 16, 100);
+  const ringMaterial = new THREE.MeshStandardMaterial({ color: 0x00e5ff});
+  const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+  ring.rotation.x = Math.PI / 2.3;
+  group.add(ring);
+
+  group.position.x = -80;
+  group.position.y = -20;
+  group.position.z = 10;
+  scene.add(group);
+  return group;
+}
+
+function animatespaceship(group) {
+  requestAnimationFrame(() => animatespaceship(group));
+  group.position.x += 0.15;
+  group.position.y += 0.05;
+  group.rotation.z += 0.01;
+
+  if (group.position.x > 100) {
+    group.position.x = -80;
+    group.position.y = -20;
+  }
+}
+
+const spaceship = addSpaceship();
+animatespaceship(spaceship);
+
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
