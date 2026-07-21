@@ -90,8 +90,34 @@ function animate() {
     positionLabel(book);
   }
 
+
+
   renderer.render(scene, camera);
 }
+
+function addcomet() {
+  const geometry = new THREE.BoxGeometry(7.5, 4.5, 0.001);
+  const material = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('comet.png')});
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.x = Math.random() * 100;
+  mesh.position.y = 40;
+  scene.add(mesh);
+  return mesh;
+}
+
+function animatecomet(mesh) {
+  requestAnimationFrame(() => animatecomet(mesh));
+  mesh.position.x -= 0.1;
+  if (mesh.position.x < -60) {
+    mesh.position.x = 10;
+    mesh.position.y = 0;
+  }
+  mesh.position.y -= 0.07;
+
+}
+
+const comet = addcomet();
+animatecomet(comet);
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
