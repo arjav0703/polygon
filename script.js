@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import './style.css'
+import { randInt, seededRandom } from 'three/src/math/MathUtils.js';
 
 const BOOKS = [
   {
@@ -14,6 +15,12 @@ const BOOKS = [
     description: "It's a classic murder mystery book. I love the plot!",
     cover: 'https://m.media-amazon.com/images/I/81ps3TVSfSL._AC_UF1000,1000_QL80_.jpg',
   },
+  {
+    title: "Radio Silence",
+    author: "Alice Oseman",
+    description: "A story of a teen girl through the challenges of adolescence",
+    cover: 'https://m.media-amazon.com/images/I/71pV5RBBjVL._AC_UF1000,1000_QL80_.jpg',
+  }
 ];
 
 
@@ -50,7 +57,7 @@ function addBook(book, index) {
   });
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.x = (index - (BOOKS.length - 1) / 2) * 20;
-  mesh.rotation.z = 0.2;
+  mesh.rotation.z = randInt(0.1, 0.3)
   scene.add(mesh);
 
   const label = document.createElement('div');
