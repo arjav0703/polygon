@@ -111,7 +111,7 @@ function animate() {
 
 function addcomet() {
   const geometry = new THREE.BoxGeometry(7.5, 4.5, 0.001);
-  const material = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('comet.png')});
+  const material = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('https://cdn.hackclub.com/019f83d8-935b-7573-a720-18fbb63b8b10/comet.png')});
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.x = Math.random() * 100;
   mesh.position.y = 40;
@@ -143,7 +143,7 @@ function addSpaceship() {
   const group = new THREE.Group();
 
   const hullGeometry = new THREE.SphereGeometry(2, 32, 32);
-  const hullMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('shiptexture.jpg')});
+  const hullMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('https://cdn.hackclub.com/019f83d8-dedb-73f3-b92b-959b0e1fd00d/shiptexture.jpg')});
   const hull = new THREE.Mesh(hullGeometry, hullMaterial);
   group.add(hull);
 
@@ -190,7 +190,7 @@ camera.add( listener );
 const sound = new THREE.Audio( listener );
 
 const audioLoader = new THREE.AudioLoader();
-audioLoader.load( 'song.webm', function( buffer ) {
+audioLoader.load( 'https://cdn.hackclub.com/019f83d8-0904-7680-a3b8-b1d31015283d/song.webm', function( buffer ) {
 	sound.setBuffer( buffer );
 	sound.setLoop( true );
 	sound.setVolume( 0.5 );
