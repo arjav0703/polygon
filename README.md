@@ -14,3 +14,6 @@ Textures:
 - the books and comet have a image texture
 
 ### cool feature 🎉: it plays music on clicking!
+
+### AI use disclosure:
+I didn't use AI for writing the code itself but i used it to help me with debugging the glow effect on the stars and shape group creation in for spaceship. All the code is human written :D
