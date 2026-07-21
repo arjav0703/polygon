@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import './style.css'
 import { randInt, seededRandom } from 'three/src/math/MathUtils.js';
+import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 
 const BOOKS = [
   {
@@ -46,9 +49,20 @@ function addStar() {
   star.position.set(x, y, z);
 
   scene.add(star);
+  return star;
 }
 
-Array(200).fill().forEach(addStar);
+const stararray = Array(200).fill().map(() => {
+  return addStar();
+});
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+
+const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera, stararray);
+outlinePass.edgeGlow = 1;
+composer.addPass(outlinePass);
+
 
 function addBook(book, index) {
   const geometry = new THREE.BoxGeometry(10, 15, 1);
@@ -92,7 +106,7 @@ function animate() {
 
 
 
-  renderer.render(scene, camera);
+  composer.render();
 }
 
 function addcomet() {
@@ -123,6 +137,7 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
 });
 
 animate();
