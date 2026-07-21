@@ -7,6 +7,7 @@ this is my first ever website made with three js!
 Shapes used:
 - rectangle(box): for the book covers, for the comet
 - sphere: for the stars
+- torus and sphere group for the spaceship
 
 Textures:
 - the stars have a mesh texture with a edge glow effect
